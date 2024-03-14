@@ -23,7 +23,12 @@ export class HeroesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getHeroesData();
+    //se simula carga con settimeout
+    this.loadingService.startLoader();
+    setTimeout(() => {
+      this.getHeroesData();
+      this.loadingService.stopLoader();
+    }, 1500);
   }
 
   getHeroesData(): void {

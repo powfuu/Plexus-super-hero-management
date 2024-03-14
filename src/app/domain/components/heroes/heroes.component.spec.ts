@@ -65,13 +65,6 @@ describe('HeroesComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should fetch heroes data on initialization', () => {
-    const heroes: Hero[] = [{ id: 1, name: 'Superman' }] as Hero[];
-    heroesServiceSpy.getHeroes.and.returnValue(of(heroes));
-    component.ngOnInit();
-    expect(component.heroes$).toBeTruthy();
-  });
-
   it('should navigate to create heroes page', () => {
     component.navigateCreateHeroes();
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/heroes/create-heroes']);

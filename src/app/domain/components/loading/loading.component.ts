@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { LoadingService } from '../../shared/services/loading/loading.service';
-import { take } from 'rxjs';
 
 @Component({
   selector: 'loading-component',
@@ -9,12 +8,6 @@ import { take } from 'rxjs';
 })
 export class LoadingComponent {
   isLoading$ = this.loadingService.getLoaderState();
-  loadingText: string = '';
 
-  constructor(private loadingService: LoadingService) {
-    this.loadingService
-      .getLoaderText()
-      .pipe(take(1))
-      .subscribe((text) => (this.loadingText = text));
-  }
+  constructor(private loadingService: LoadingService) {}
 }

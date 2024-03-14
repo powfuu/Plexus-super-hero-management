@@ -8,7 +8,7 @@
 
 # npm start -> Arrancar proyecto
 
-# npm run test -> Arrancar test unitarios (37 Pruebas realizadas)
+# npm run test -> Arrancar test unitarios (36 Pruebas realizadas)
 
 # Muchas gracias por leer!!!!!!
 
