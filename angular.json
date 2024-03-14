@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "super-heros-management": {
+    "super-heroes-management": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,22 +17,17 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/super-heros-management",
+            "outputPath": "dist/super-heroes-management",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "scripts": [],
             "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": []
+              "@angular/material/prebuilt-themes/pink-bluegrey.css"
+            ]
           },
           "configurations": {
             "production": {
@@ -65,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "super-heros-management:build:production"
+              "browserTarget": "super-heroes-management:build:production"
             },
             "development": {
-              "browserTarget": "super-heros-management:build:development"
+              "browserTarget": "super-heroes-management:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,26 +71,20 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "super-heros-management:build"
+            "browserTarget": "super-heroes-management:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "scripts": [],
             "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": []
+              "@angular/material/prebuilt-themes/pink-bluegrey.css"
+            ]
           }
         }
       }

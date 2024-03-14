@@ -1,0 +1,70 @@
+$bgColorDefault: rgb(240, 240, 240);
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+.header-content {
+  width: 98%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  button {
+    margin-left: auto;
+  }
+}
+.empty-heroes-list {
+  background: $bgColorDefault;
+  padding: 50px;
+  border-radius: 10px;
+  margin-top: 30px;
+  font-size: 16px;
+  span {
+    color: red;
+    cursor: pointer;
+  }
+}
+
+.custom-search-input {
+  text-transform: capitalize;
+  background-color: #fff;
+  border-radius: 25px;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease;
+  outline: none;
+  margin-top: 20px;
+  transition: 0.5s all ease;
+  font-size: 16px;
+}
+.custom-search-input:focus {
+  border-color: #000;
+  color: #000;
+}
+.custom-search-input:disabled {
+  opacity: 0.5;
+}
+
+.hero-item {
+  border-radius: 10px;
+  background: $bgColorDefault;
+  margin-top: 20px;
+  margin-bottom: 35px;
+  padding: 20px 30px;
+}
+
+.hero-item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-item-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.hero-name {
+  text-transform: capitalize;
+}

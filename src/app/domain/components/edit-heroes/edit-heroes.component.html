@@ -1,0 +1,18 @@
+<ng-container>
+    <form [formGroup]="heroForm" (ngSubmit)="submitForm()">
+        <div>
+            <p for="heroName">Hero Name:</p>
+            <input type="text" class="input-name" formControlName="heroName">
+        </div>
+        <div>
+            <p for="superpower">Hero Superpower:</p>
+            <input type="text" id="superpower" formControlName="superpower">
+        </div>
+        <button (click)="navigateTo('../')" color="light" mat-fab extended>
+            Back to the list
+        </button>
+        <button color="primary" type="submit" mat-fab extended>
+            Save Hero
+        </button>
+    </form>
+</ng-container>

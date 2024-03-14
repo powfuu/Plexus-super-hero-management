@@ -1,0 +1,23 @@
+//Estilos personalizados de loading
+.loader {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  mat-progress-spinner {
+    transform: scale(0.35);
+  }
+  .content {
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding-right: 35px;
+  }
+}

@@ -1,0 +1,21 @@
+div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  margin-left: 10px;
+  img {
+    height: 80px;
+  }
+  // titulo app con efecto gradient bastante guay
+  p {
+    font-size: 30px;
+    margin-top: 25px;
+    background: linear-gradient(45deg, #ff0000, #ffff00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding: 10px;
+  }
+}

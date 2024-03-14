@@ -1,0 +1,42 @@
+<body>
+    <loading-component></loading-component>
+    <div class="header-content">
+        <h1>Heroes list</h1>
+        <button (click)="navigateCreateHeroes()" color="primary" mat-fab extended>
+            <mat-icon>add</mat-icon>
+            ADD NEW HERO
+        </button>
+    </div>
+    <ng-container *ngIf="(heroes$ | async) as heroes">
+
+        <input [(ngModel)]="heroSearch" [disabled]="heroes.length === 0" type="text" placeholder="Search for a hero..."
+            class="custom-search-input">
+
+        <div *ngIf="heroes.length > 0; else emptyHeroesList" class="heroes-list-content">
+            <div *ngFor="let hero of heroes | filterHeroes: heroSearch" class="hero-item">
+                <div class="hero-item-content">
+                    <div class="hero-item-info">
+                        <h1 class="hero-name">{{hero.name}}</h1>
+                        <h3>{{hero.superpower}}</h3>
+                    </div>
+                </div>
+                <div class="hero-item-actions">
+                    <button (click)="confirmDeleteHero(hero)" color="warn" mat-fab extended>
+                        <mat-icon>delete</mat-icon>
+                        Delete Hero
+                    </button>
+                    <button (click)="navigateEditHero(hero.id)" color="primary" mat-fab extended>
+                        <mat-icon>edit</mat-icon>
+                        Edit Hero
+                    </button>
+                </div>
+            </div>
+        </div>
+        <ng-template #emptyHeroesList>
+            <div class="empty-heroes-list">
+                There's no heroes available yet. <span (click)="navigateCreateHeroes()">Click me to add a new hero
+                    now!</span>
+            </div>
+        </ng-template>
+    </ng-container>
+</body>
