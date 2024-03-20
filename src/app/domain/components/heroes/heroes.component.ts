@@ -34,7 +34,7 @@ export class HeroesComponent implements OnInit {
     this.loadingService.startLoader();
     setTimeout(() => {
       this.loadingService.stopLoader();
-    }, 1500);
+    }, 1000);
   }
 
   getHeroesData(): void {

@@ -4,7 +4,8 @@
         <p>{{data.description}}</p>
     </mat-dialog-content>
     <mat-dialog-actions class="dialog-actions">
-        <button mat-fab extended color="warn" (click)="cancel()" class="cancel-button">Cancel</button>
+        <button *ngIf="!data.hideCancelButton" mat-fab extended color="warn" (click)="cancel()"
+            class="cancel-button">Cancel</button>
         <button color="primary" mat-fab extended (click)="confirm()">Confirm</button>
     </mat-dialog-actions>
 

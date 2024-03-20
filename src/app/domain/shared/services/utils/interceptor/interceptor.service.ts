@@ -38,6 +38,7 @@ export class Interceptor implements HttpInterceptor {
         title: 'ALERTA',
         description:
           'Status Error: Node.Js Server no se ha inicializado, por favor leer README!!!',
+        hideCancelButton: true,
       },
     });
 
