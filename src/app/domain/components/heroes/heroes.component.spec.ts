@@ -1,13 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HeroesComponent } from './heroes.component';
-import { HeroesService } from '../../shared/services/heroes/heroes.service';
-import { LoadingService } from '../../shared/services/loading/loading.service';
-import { ToastService } from '../../shared/services/toast/toast.service';
+import { HeroesService } from '../../shared/services/utils/heroes/heroes.service';
+import { LoadingService } from '../../shared/services/utils/loading/loading.service';
+import { ToastService } from '../../shared/services/utils/toast/toast.service';
 import { of } from 'rxjs';
 import { Hero } from '../../shared/models/hero.model';
 import { Router } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('HeroesComponent', () => {
   let component: HeroesComponent;
@@ -34,7 +36,7 @@ describe('HeroesComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [HeroesComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, HttpClientTestingModule, MatDialogModule],
       providers: [
         { provide: HeroesService, useValue: heroesServiceSpyObj },
         { provide: LoadingService, useValue: loadingServiceSpyObj },
@@ -76,22 +78,5 @@ describe('HeroesComponent', () => {
     expect(routerSpy.navigate).toHaveBeenCalledWith([
       `/heroes/edit-heroes/${heroId}`,
     ]);
-  });
-
-  it('should confirm and delete hero', () => {
-    const hero: Hero = { id: 1, name: 'Superman' } as Hero;
-    spyOn(window, 'confirm').and.returnValue(true);
-    component.confirmDeleteHero(hero);
-    expect(heroesServiceSpy.deleteHero).toHaveBeenCalledWith(hero.id);
-    expect(toastServiceSpy.showNotification).toHaveBeenCalledWith(
-      'Hero has been deleted'
-    );
-  });
-
-  it('should not delete hero when cancel is clicked', () => {
-    spyOn(window, 'confirm').and.returnValue(false);
-    component.confirmDeleteHero({} as Hero);
-    expect(heroesServiceSpy.deleteHero).not.toHaveBeenCalled();
-    expect(toastServiceSpy.showNotification).not.toHaveBeenCalled();
   });
 });

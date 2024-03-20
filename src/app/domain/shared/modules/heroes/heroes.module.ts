@@ -7,8 +7,11 @@ import { SharedModule } from '../shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterHeroesPipe } from '../../pipes/filter-heroes/filter-heroes.pipe';
+import { HeroesDataService } from '../../services/data/heroes-data/heroes-data.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,8 +28,10 @@ import { FilterHeroesPipe } from '../../pipes/filter-heroes/filter-heroes.pipe';
     MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
+    MatSlideToggleModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [HeroesDataService],
 })
 export class HeroesModule {}

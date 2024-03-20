@@ -2,10 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EditHeroesComponent } from './edit-heroes.component';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastService } from '../../shared/services/toast/toast.service';
-import { HeroesService } from '../../shared/services/heroes/heroes.service';
+import { ToastService } from '../../shared/services/utils/toast/toast.service';
+import { HeroesService } from '../../shared/services/utils/heroes/heroes.service';
 import { of } from 'rxjs';
 import { Hero } from '../../shared/models/hero.model';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 describe('EditHeroesComponent', () => {
   let component: EditHeroesComponent;
@@ -30,7 +31,7 @@ describe('EditHeroesComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [EditHeroesComponent],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, MatSlideToggleModule],
       providers: [
         FormBuilder,
         { provide: Router, useValue: routerSpyObj },
@@ -61,13 +62,21 @@ describe('EditHeroesComponent', () => {
   });
 
   it('should load current hero on initialization', () => {
-    const hero: Hero = { id: 123, name: '', superpower: '' };
+    const hero: Hero = {
+      id: 123,
+      name: 'Superman',
+      superpower: 'Flying',
+      age: 30,
+      canFly: true,
+    };
     heroesServiceSpy.getCurrentHero.and.returnValue(of(hero));
     component.ngOnInit();
     expect(component.currentHero).toEqual(hero);
     expect(component.heroForm.value).toEqual({
       heroName: hero.name,
+      heroAge: hero.age,
       superpower: hero.superpower,
+      heroCanFly: hero.canFly,
     });
   });
 
@@ -76,10 +85,14 @@ describe('EditHeroesComponent', () => {
       id: 123,
       name: 'Batman',
       superpower: 'Gadgets',
+      age: 35,
+      canFly: false,
     };
     const formValue = {
       heroName: updatedHero.name,
+      heroAge: updatedHero.age,
       superpower: updatedHero.superpower,
+      heroCanFly: updatedHero.canFly,
     };
     spyOn(component, 'updateHero');
     component.heroForm.setValue(formValue);
@@ -88,7 +101,12 @@ describe('EditHeroesComponent', () => {
   });
 
   it('should show notification when form validation fails', () => {
-    component.heroForm.setValue({ heroName: '', superpower: '' });
+    component.heroForm.setValue({
+      heroName: '',
+      heroAge: '',
+      superpower: '',
+      heroCanFly: '',
+    });
     component.submitForm();
     expect(toastServiceSpy.showNotification).toHaveBeenCalledWith(
       'Form validation failed, please try again!'

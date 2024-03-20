@@ -6,7 +6,19 @@
 
 # Arquitectura de Angular escalable y optimizaciones de rendimiento
 
+# FRONTAL:
+
+# npm install -> Instalar dependencias
+
 # npm start -> Arrancar proyecto
+
+# BACK SERVER:
+
+# ubicarse en -> /src/app/server/
+
+# npm install -> Instalar dependencias back
+
+# npm start -> Arrancar servidor (PORT:3008)
 
 # npm run test -> Arrancar test unitarios (36 Pruebas realizadas)
 

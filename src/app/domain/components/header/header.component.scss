@@ -5,6 +5,7 @@ div {
   margin-bottom: 30px;
   margin-top: 20px;
   margin-left: 10px;
+  animation: slideFromTop 1s ease;
   img {
     height: 80px;
   }
@@ -17,5 +18,16 @@ div {
     background-clip: text;
     color: transparent;
     padding: 10px;
+  }
+}
+
+@keyframes slideFromTop {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
   }
 }

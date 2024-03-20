@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastService } from '../../shared/services/toast/toast.service';
-import { UtilService } from '../../shared/services/util/util.service';
-import { HeroesService } from '../../shared/services/heroes/heroes.service';
+import { ToastService } from '../../shared/services/utils/toast/toast.service';
+import { UtilService } from '../../shared/services/utils/util/util.service';
+import { HeroesService } from '../../shared/services/utils/heroes/heroes.service';
 
 @Component({
   selector: 'app-create-heroes',
@@ -22,25 +22,31 @@ export class CreateHeroesComponent {
   ) {
     this.heroForm = this.formBuilder.group({
       heroName: ['', Validators.required],
+      heroAge: [null, Validators.required],
       superpower: ['', Validators.required],
+      heroCanFly: [false, Validators.required],
     });
   }
 
   submitForm(): void {
     if (this.heroForm.valid) {
       const heroName = this.heroForm.get('heroName')!.value;
+      const heroAge = this.heroForm.get('heroAge')!.value;
+      const heroCanFly = this.heroForm.get('heroCanFly')!.value;
       const superpower = this.heroForm.get('superpower')!.value;
       const hero = {
         id: this.util.generateRandomId(),
         name: heroName,
+        age: heroAge,
         superpower: superpower,
+        canFly: heroCanFly,
       };
       this.heroesService.addHero(hero);
       this.toastService.showNotification('Super hero has been created!');
       this.navigateTo('../');
     } else {
       this.toastService.showNotification(
-        'Form validation failed, please try again!'
+        'Form validation failed, please complete the form!'
       );
     }
   }

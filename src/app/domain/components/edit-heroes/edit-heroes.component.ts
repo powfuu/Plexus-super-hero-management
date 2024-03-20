@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastService } from '../../shared/services/toast/toast.service';
-import { HeroesService } from '../../shared/services/heroes/heroes.service';
+import { ToastService } from '../../shared/services/utils/toast/toast.service';
+import { HeroesService } from '../../shared/services/utils/heroes/heroes.service';
 import { take } from 'rxjs/operators';
 import { Hero } from '../../shared/models/hero.model';
 
@@ -31,7 +31,9 @@ export class EditHeroesComponent implements OnInit {
     });
     this.heroForm = this.formBuilder.group({
       heroName: [this.currentHero?.name, Validators.required],
+      heroAge: [this.currentHero?.age, Validators.required],
       superpower: [this.currentHero?.superpower, Validators.required],
+      heroCanFly: [this.currentHero?.canFly, Validators.required],
     });
   }
 
@@ -46,11 +48,13 @@ export class EditHeroesComponent implements OnInit {
 
   submitForm(): void {
     if (this.heroForm.valid) {
-      const { heroName, superpower } = this.heroForm.value;
+      const { heroName, heroAge, heroCanFly, superpower } = this.heroForm.value;
       const updatedHero: Hero = {
         id: this.idHero,
         name: heroName,
+        age: heroAge,
         superpower: superpower,
+        canFly: heroCanFly,
       };
       this.updateHero(updatedHero);
     } else {

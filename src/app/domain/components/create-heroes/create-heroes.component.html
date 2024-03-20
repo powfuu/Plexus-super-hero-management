@@ -2,11 +2,19 @@
     <form [formGroup]="heroForm" (ngSubmit)="submitForm()">
         <div>
             <p for="heroName">Hero Name:</p>
-            <input type="text" class="input-name" formControlName="heroName">
+            <input type="text" [value]="heroForm.get('heroName')?.value | uppercase" formControlName="heroName" />
+        </div>
+        <div>
+            <p for="age">Hero Age:</p>
+            <input type="number" id="age" formControlName="heroAge">
         </div>
         <div>
             <p for="superpower">Hero Superpower:</p>
             <input type="text" id="superpower" formControlName="superpower">
+        </div>
+        <div>
+            <p for="hero-can-fly">Hero can fly?</p>
+            <mat-slide-toggle id="hero-can-fly" formControlName="heroCanFly">Toggle</mat-slide-toggle>
         </div>
         <button (click)="navigateTo('../')" color="light" mat-fab extended>
             Back to the list

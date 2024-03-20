@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoadingService } from '../../shared/services/loading/loading.service';
+import { LoadingService } from '../../shared/services/utils/loading/loading.service';
 
 @Component({
   selector: 'loading-component',

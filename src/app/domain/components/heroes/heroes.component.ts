@@ -1,10 +1,14 @@
-import { ToastService } from './../../shared/services/toast/toast.service';
+import { UtilService } from './../../shared/services/utils/util/util.service';
+import { ToastService } from '../../shared/services/utils/toast/toast.service';
 import { Component, OnInit } from '@angular/core';
-import { LoadingService } from '../../shared/services/loading/loading.service';
-import { HeroesService } from '../../shared/services/heroes/heroes.service';
-import { Observable } from 'rxjs';
+import { LoadingService } from '../../shared/services/utils/loading/loading.service';
+import { HeroesService } from '../../shared/services/utils/heroes/heroes.service';
+import { Observable, take } from 'rxjs';
 import { Hero } from '../../shared/models/hero.model';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
+import { HeroesDataService } from '../../shared/services/data/heroes-data/heroes-data.service';
 
 @Component({
   selector: 'app-heroes',
@@ -18,21 +22,28 @@ export class HeroesComponent implements OnInit {
   constructor(
     private loadingService: LoadingService,
     private heroesService: HeroesService,
+    private heroesData: HeroesDataService,
     private router: Router,
+    private dialog: MatDialog,
     private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
-    //se simula carga con settimeout
+    this.getHeroesData();
+    //se simula carga con settimeout, solo para visualizar loading
     this.loadingService.startLoader();
     setTimeout(() => {
-      this.getHeroesData();
       this.loadingService.stopLoader();
     }, 1500);
   }
 
   getHeroesData(): void {
-    this.heroes$ = this.heroesService.getHeroes();
+    this.heroesData
+      .getHeroesData()
+      .pipe(take(1))
+      .subscribe((heroes) => {
+        this.heroes$ = this.heroesService.initializeHeroes(heroes);
+      });
   }
 
   navigateCreateHeroes(): void {
@@ -44,9 +55,23 @@ export class HeroesComponent implements OnInit {
   }
 
   confirmDeleteHero(hero: Hero): void {
-    if (window.confirm('Are you sure you want to delete the selected Hero?')) {
-      this.heroesService.deleteHero(hero.id);
-      this.toastService.showNotification('Hero has been deleted');
-    }
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '350px',
+      data: {
+        title: 'Confirmation',
+        description: 'Are you sure you want to delete the selected hero?',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.heroesService.deleteHero(hero.id);
+        this.toastService.showNotification('Hero has been deleted');
+      }
+    });
+  }
+
+  getHeroCanFlyText(canFly: boolean): string {
+    return canFly ? 'Hero can fly! 🪽🪽' : "Hero can't fly 🙁🪽";
   }
 }

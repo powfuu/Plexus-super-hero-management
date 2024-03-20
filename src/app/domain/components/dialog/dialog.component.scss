@@ -1,0 +1,14 @@
+.dialog-content {
+  background-color: #fff !important;
+  padding: 15px;
+  border-radius: 5px;
+  p,
+  h1 {
+    color: #000 !important;
+  }
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: space-between;
+}
