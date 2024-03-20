@@ -16,6 +16,7 @@
             <div *ngFor="let hero of heroes | filterHeroes: heroSearch" class="hero-item">
                 <div class="hero-item-content">
                     <div class="hero-item-info">
+                        <img [src]="hero.photo" alt="Hero" />
                         <h1>{{hero.name | uppercase}}</h1>
                         <h3>Hero age: <strong>{{hero.age}}</strong></h3>
                         <h3>Hero superpower: <strong>{{hero.superpower}}</strong></h3>

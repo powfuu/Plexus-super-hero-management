@@ -11,6 +11,7 @@ describe('HeroesService', () => {
   const mockHeroes: Hero[] = [
     {
       id: 1,
+      photo: '',
       name: 'Test Hero',
       superpower: 'Invisibility',
       age: 30,
@@ -49,6 +50,7 @@ describe('HeroesService', () => {
   it('should add a hero', () => {
     const newHero = {
       id: 2,
+      photo: '',
       name: 'New Hero',
       superpower: 'Flight',
       age: 28,
@@ -68,6 +70,7 @@ describe('HeroesService', () => {
   it('should update a hero', () => {
     const updatedHero = {
       id: 1,
+      photo: '',
       name: 'Updated Hero',
       superpower: 'Super Strength',
       age: 31,
@@ -86,6 +89,7 @@ describe('HeroesService', () => {
   it('should delete a hero', () => {
     const anotherHero = {
       id: 2,
+      photo: '',
       name: 'Another Hero',
       superpower: 'Speed',
       age: 25,

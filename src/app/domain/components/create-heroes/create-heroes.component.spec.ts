@@ -46,6 +46,7 @@ describe('CreateHeroesComponent', () => {
     component.heroForm.controls['heroAge'].setValue(30);
     component.heroForm.controls['superpower'].setValue('Flight');
     component.heroForm.controls['heroCanFly'].setValue(true);
+    component.heroForm.controls['heroPhoto'].setValue('base64img');
     expect(component.heroForm.valid).toBeTruthy();
   });
 });

@@ -4,4 +4,5 @@ export interface Hero {
   superpower: string;
   age: number;
   canFly: boolean;
+  photo: string;
 }

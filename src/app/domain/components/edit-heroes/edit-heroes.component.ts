@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from '../../shared/services/utils/toast/toast.service';
 import { HeroesService } from '../../shared/services/utils/heroes/heroes.service';
 import { take } from 'rxjs/operators';
 import { Hero } from '../../shared/models/hero.model';
+import { PhotosService } from '../../shared/services/photos/photos.service';
 
 @Component({
   selector: 'app-edit-heroes',
@@ -12,6 +13,7 @@ import { Hero } from '../../shared/models/hero.model';
   styleUrls: ['./edit-heroes.component.scss'],
 })
 export class EditHeroesComponent implements OnInit {
+  @ViewChild('fileInput') fileInput!: ElementRef;
   idHero!: number;
   heroForm!: FormGroup;
   currentHero!: Hero | undefined;
@@ -21,7 +23,8 @@ export class EditHeroesComponent implements OnInit {
     private router: Router,
     private toastService: ToastService,
     private heroesService: HeroesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private photosService: PhotosService
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +33,7 @@ export class EditHeroesComponent implements OnInit {
       this.loadCurrentHero();
     });
     this.heroForm = this.formBuilder.group({
+      heroPhoto: [this.currentHero?.photo, Validators.required],
       heroName: [this.currentHero?.name, Validators.required],
       heroAge: [this.currentHero?.age, Validators.required],
       superpower: [this.currentHero?.superpower, Validators.required],
@@ -48,9 +52,11 @@ export class EditHeroesComponent implements OnInit {
 
   submitForm(): void {
     if (this.heroForm.valid) {
-      const { heroName, heroAge, heroCanFly, superpower } = this.heroForm.value;
+      const { heroPhoto, heroName, heroAge, heroCanFly, superpower } =
+        this.heroForm.value;
       const updatedHero: Hero = {
         id: this.idHero,
+        photo: heroPhoto,
         name: heroName,
         age: heroAge,
         superpower: superpower,
@@ -62,6 +68,23 @@ export class EditHeroesComponent implements OnInit {
         'Form validation failed, please try again!'
       );
     }
+  }
+
+  onFileChange(event: any) {
+    this.photosService
+      .previewImage(event)
+      .then((dataURL) => {
+        this.heroForm.patchValue({
+          heroPhoto: dataURL,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  openFileInput() {
+    this.fileInput.nativeElement.click();
   }
 
   updateHero(updatedHero: Hero): void {

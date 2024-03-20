@@ -64,6 +64,7 @@ describe('EditHeroesComponent', () => {
   it('should load current hero on initialization', () => {
     const hero: Hero = {
       id: 123,
+      photo: '',
       name: 'Superman',
       superpower: 'Flying',
       age: 30,
@@ -73,6 +74,7 @@ describe('EditHeroesComponent', () => {
     component.ngOnInit();
     expect(component.currentHero).toEqual(hero);
     expect(component.heroForm.value).toEqual({
+      heroPhoto: hero.photo,
       heroName: hero.name,
       heroAge: hero.age,
       superpower: hero.superpower,
@@ -83,6 +85,7 @@ describe('EditHeroesComponent', () => {
   it('should update hero when form is submitted', () => {
     const updatedHero: Hero = {
       id: 123,
+      photo: 'imgBase64',
       name: 'Batman',
       superpower: 'Gadgets',
       age: 35,
@@ -90,6 +93,7 @@ describe('EditHeroesComponent', () => {
     };
     const formValue = {
       heroName: updatedHero.name,
+      heroPhoto: updatedHero.photo,
       heroAge: updatedHero.age,
       superpower: updatedHero.superpower,
       heroCanFly: updatedHero.canFly,
@@ -106,6 +110,7 @@ describe('EditHeroesComponent', () => {
       heroAge: '',
       superpower: '',
       heroCanFly: '',
+      heroPhoto: '',
     });
     component.submitForm();
     expect(toastServiceSpy.showNotification).toHaveBeenCalledWith(

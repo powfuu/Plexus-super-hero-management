@@ -20,7 +20,7 @@
 
 # npm start -> Arrancar servidor (PORT:3008)
 
-# npm run test -> Arrancar test unitarios (37 Pruebas realizadas)
+# npm run test -> Arrancar test unitarios (39 Pruebas realizadas)
 
 # Muchas gracias por leer!!!!!!
 
