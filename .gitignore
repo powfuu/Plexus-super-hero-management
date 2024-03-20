@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 # Server
-/Users/dev-mochi/Desktop/dev/super-heroes/src/app/server/node_modules/
+src/app/server/node_modules/
